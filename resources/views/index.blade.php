@@ -311,17 +311,18 @@
                     </div>
                     <div class="card-body">
                         <div>
+
                             <div class="row">
                                 <div class="col-4">
                                     <div class="card sub-card">
                                         <div class="sub-card-title">
                                             <h6 style="padding-right:0px !important; ">
-                                                الاضاءة
+                                                غرفة 1
                                             </h6>
                                         </div>
                                         <div class="sub-card-body">
                                             <label class="switch">
-                                                <input type="checkbox">
+                                                <input type="checkbox" id="room1_light" onchange="room1_light_fn()">
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -331,17 +332,62 @@
                                     <div class="card sub-card">
                                         <div class="sub-card-title">
                                             <h6 style="padding-right:0px !important; ">
-                                                الاصوات
+                                                غرفة 2
                                             </h6>
                                         </div>
                                         <div class="sub-card-body">
-                                            <select name="sound" class="form-select form-control"
-                                                id="validationTooltip04">
-                                                <option value="1">انذار</option>
-                                                <option value="2">اغنية</option>
-                                                <option value="3">قران</option>
-                                                <option value="4">غير</option>
-                                            </select>
+                                            <label class="switch">
+                                                <input type="checkbox" id="room2_light" onchange="room2_light_fn()">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                غرفة 3
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="room3_light" onchange="room3_light_fn()">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                غرفة المعيشة
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="living_room_light"
+                                                    onchange="living_room_light_fn()">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                المطبخ
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="kitchen_light" onchange="kitchen_light_fn()">
+                                                <span class="slider round"></span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -361,36 +407,26 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                الاوضاع
+                            </h3>
+                        </div>
+                        {{--  <div>
+
                             <div class="row">
                                 <div class="col-4">
                                     <div class="card sub-card">
                                         <div class="sub-card-title">
                                             <h6 style="padding-right:0px !important; ">
-                                                شدة الاضاءة
-                                            </h6>
-                                        </div>
-                                        <div class="sub-card-body">
-                                            <div class="slider-container">
-                                                <div class="slider-value">
-                                                    <span id="slider-value" class="value-style">50</span><span
-                                                        class="value-style">%</span>
-                                                </div>
-                                                <input type="range" min="0" max="100" value="50"
-                                                    class="range-slider" id="range-slider" disabled>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="card sub-card">
-                                        <div class="sub-card-title">
-                                            <h6 style="padding-right:0px !important; ">
-                                                الباب
+                                                غرفة 1
                                             </h6>
                                         </div>
                                         <div class="sub-card-body">
                                             <label class="switch">
-                                                <input type="checkbox">
+                                                <input type="checkbox" id="room1_light">
                                                 <span class="slider round"></span>
                                             </label>
                                         </div>
@@ -400,22 +436,82 @@
                                     <div class="card sub-card">
                                         <div class="sub-card-title">
                                             <h6 style="padding-right:0px !important; ">
-                                                سرعة المروحة
+                                                غرفة 2
                                             </h6>
                                         </div>
                                         <div class="sub-card-body">
-                                            <div class="slider-container">
-                                                <div class="slider-value">
-                                                    <span id="slider-value2" class="value-style">3</span>
-                                                </div>
-                                                <input type="range" min="0" max="5" value="3"
-                                                    class="range-slider" id="range_slider2">
-                                            </div>
+                                            <label class="switch">
+                                                <input type="checkbox" id="room2_light">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                غرفة 3
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="room3_light">
+                                                <span class="slider round"></span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                غرفة المعيشة
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="living_room_light">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                المطبخ
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" id="kitchen_light">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card sub-card">
+                                        <div class="sub-card-title">
+                                            <h6 style="padding-right:0px !important; ">
+                                                المروحة
+                                            </h6>
+                                        </div>
+                                        <div class="sub-card-body">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>  --}}
                     </div>
                 </div>
             </div>
@@ -425,6 +521,10 @@
     @section('script')
         <script>
             const room1_light = document.getElementById("room1_light");
+            const room2_light = document.getElementById("room2_light");
+            const room3_light = document.getElementById("room3_light");
+            const living_room_light = document.getElementById("living_room_light");
+            const kitchen_light = document.getElementById("kitchen_light");
             const range_slider2 = document.getElementById("range_slider2");
 
 
@@ -438,11 +538,11 @@
                         // update the content of the span element with the latest value
                         document.getElementById('temperature').textContent = temperature;
                         document.getElementById('humidity').textContent = humidity;
-                        if (testlde) {
-                            chtest.checked = true;
-                        } else {
-                            chtest.checked = false;
-                        }
+                        room1_light.checked = data.room1_light;
+                        room2_light.checked = data.room2_light;
+                        room3_light.checked = data.room3_light;
+                        living_room_light.checked = data.living_room_light;
+                        kitchen_light.checked = data.kitchen_light;
                     })
             }
 
@@ -468,6 +568,74 @@
                 var checkbox_value = $("#room1_light").is(":checked") ? true : false;
                 $.ajax({
                     url: "http://localhost/laravel-projects/Esp32/public/room1_light",
+                    type: "POST",
+                    data: {
+                        value: checkbox_value
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function room2_light_fn() {
+                var checkbox_value = $("#room2_light").is(":checked") ? true : false;
+                $.ajax({
+                    url: "http://localhost/laravel-projects/Esp32/public/room2_light",
+                    type: "POST",
+                    data: {
+                        value: checkbox_value
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function room3_light_fn() {
+                var checkbox_value = $("#room3_light").is(":checked") ? true : false;
+                $.ajax({
+                    url: "http://localhost/laravel-projects/Esp32/public/room3_light",
+                    type: "POST",
+                    data: {
+                        value: checkbox_value
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function living_room_light_fn() {
+                var checkbox_value = $("#living_room_light").is(":checked") ? true : false;
+                $.ajax({
+                    url: "http://localhost/laravel-projects/Esp32/public/living_room_light",
+                    type: "POST",
+                    data: {
+                        value: checkbox_value
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+
+            function kitchen_light_fn() {
+                var checkbox_value = $("#kitchen_light").is(":checked") ? true : false;
+                $.ajax({
+                    url: "http://localhost/laravel-projects/Esp32/public/kitchen_light",
                     type: "POST",
                     data: {
                         value: checkbox_value

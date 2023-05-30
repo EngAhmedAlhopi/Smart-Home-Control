@@ -43,6 +43,79 @@ class Esp32Data extends Controller
         }
     }
 
+    public function room2_light_fn(Request $request)
+    {
+        if (Session::get('permission') == 'write' || Session::get('permission') == 'owner') {
+            $value = $request->input('value');
+            if ($value == "true")
+                $value = true;
+            else
+                $value = false;
+            $this->database->getReference($this->table)->update(['room2_light' => $value]);
+        } else {
+            return redirect()->route('loginPage');
+        }
+    }
+
+    public function room3_light_fn(Request $request)
+    {
+        if (Session::get('permission') == 'write' || Session::get('permission') == 'owner') {
+            $value = $request->input('value');
+            if ($value == "true")
+                $value = true;
+            else
+                $value = false;
+            $this->database->getReference($this->table)->update(['room3_light' => $value]);
+        } else {
+            return redirect()->route('loginPage');
+        }
+    }
+
+    public function living_room_light_fn(Request $request)
+    {
+        if (Session::get('permission') == 'write' || Session::get('permission') == 'owner') {
+            $value = $request->input('value');
+            if ($value == "true")
+                $value = true;
+            else
+                $value = false;
+            $this->database->getReference($this->table)->update(['living_room_light' => $value]);
+        } else {
+            return redirect()->route('loginPage');
+        }
+    }
+
+    public function kitchen_light_fn(Request $request)
+    {
+        if (Session::get('permission') == 'write' || Session::get('permission') == 'owner') {
+            $value = $request->input('value');
+            if ($value == "true")
+                $value = true;
+            else
+                $value = false;
+            $this->database->getReference($this->table)->update(['kitchen_light' => $value]);
+        } else {
+            return redirect()->route('loginPage');
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function room1_motor_fn(Request $request)
     {
         if (Session::get('permission') == 'write' || Session::get('permission') == 'owner') {

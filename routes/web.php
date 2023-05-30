@@ -32,7 +32,7 @@ Route::get('/index', function () {
     }
 })->name('indexPage');
 
-Route::get('/get_things_data', [Esp32Data::class, 'index'])->name('thingsData');
+Route::get('get_things_data', [Esp32Data::class, 'index'])->name('thingsData');
 
 
 
@@ -74,5 +74,15 @@ Route::get('/notification', function () {
 /* *************************************************************************************** */
 /*                                عمليات التحكم في الاشياء                                */
 Route::post('/room1_light', [Esp32Data::class, 'room1_light_fn'])->name('room1_light');
+Route::post('/room2_light', [Esp32Data::class, 'room2_light_fn'])->name('room2_light');
+Route::post('/room3_light', [Esp32Data::class, 'room3_light_fn'])->name('room3_light');
+Route::post('/living_room_light', [Esp32Data::class, 'living_room_light_fn'])->name('living_room_light');
+Route::post('/kitchen_light', [Esp32Data::class, 'kitchen_light_fn'])->name('kitchen_light');
+
+
+
+
+
+
 Route::post('/room1_motor', [Esp32Data::class, 'room1_motor_fn'])->name('room1_motor');
 /* *************************************************************************************** */

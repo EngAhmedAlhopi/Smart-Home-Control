@@ -13,7 +13,11 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'login',
+        'room1_motor',
         'room1_light',
-        'room1_motor'
+        'room2_light',
+        'room3_light',
+        'living_room_light',
+        'kitchen_light'
     ];
 }

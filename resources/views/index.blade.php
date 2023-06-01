@@ -43,7 +43,7 @@
         }
 
         .box {
-            height: 100px;
+            height: 85px;
             width: 60%;
             border: solid 1px rgb(255, 255, 255);
             margin: 0 auto;
@@ -182,7 +182,7 @@
                                         </h6>
                                     </div>
                                     <div class="sub-card-body">
-                                        <span class="value-style">1.3%</span>
+                                        <span class="value-style"><span id="gas"></span>%</span>
                                     </div>
                                 </div>
                             </div>
@@ -192,27 +192,11 @@
                                 <div class="card sub-card">
                                     <div class="sub-card-title">
                                         <h6 style="padding-right:0px !important; ">
-                                            الحركة
+                                            نسبة الكربون
                                         </h6>
                                     </div>
                                     <div class="sub-card-body">
-                                        <div class="box" style="background-color: MediumSeaGreen">
-                                            <div class="box-text">
-                                                منعدمة
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="box" style="background-color: rgb(227, 227, 66)">
-                                        <div class="box-text">
-                                            خفيفة
-                                        </div>
-                                    </div> --}}
-
-                                        {{-- <div class="box" style="background-color: red">
-                                        <div class="box-text">
-                                            شديدة
-                                        </div>
-                                    </div> --}}
+                                        <span class="value-style"><span id="carbon"></span>%</span>
                                     </div>
                                 </div>
                             </div>
@@ -220,27 +204,11 @@
                                 <div class="card sub-card">
                                     <div class="sub-card-title">
                                         <h6 style="padding-right:0px !important; ">
-                                            الصوت
+                                            المسافة
                                         </h6>
                                     </div>
                                     <div class="sub-card-body">
-                                        {{-- <div class="box" style="background-color: MediumSeaGreen">
-                                        <div class="box-text">
-                                            هادئ
-                                        </div>
-                                    </div> --}}
-
-                                        <div class="box" style="background-color: rgb(227, 227, 66)">
-                                            <div class="box-text">
-                                                خفيف
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="box" style="background-color: red">
-                                        <div class="box-text">
-                                            ضوضاء
-                                        </div>
-                                    </div> --}}
+                                        <span class="value-style"><span id="distance"></span>سم</span>
                                     </div>
                                 </div>
                             </div>
@@ -252,23 +220,22 @@
                                         </h6>
                                     </div>
                                     <div class="sub-card-body">
-                                        <div class="box" style="background-color: MediumSeaGreen">
+                                        <div class="box" style="background-color: MediumSeaGreen " id="green_flame">
                                             <div class="box-text">
                                                 لا يوجد
                                             </div>
                                         </div>
-
-                                        {{-- <div class="box" style="background-color: red">
-                                        <div class="box-text">
-                                            يوجد
+                                        <div class="box" style="background-color: red ; display: none;" id="red_flame">
+                                            <div class="box-text">
+                                                يوجد
+                                            </div>
                                         </div>
-                                    </div> --}}
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="row">
+                        {{--  <div class="row">
                             <div class="col-4">
                                 <div class="card sub-card">
                                     <div class="sub-card-title">
@@ -294,7 +261,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>  --}}
                         <!------------------------------------------------------------------------------------------------------>
                     </div>
                 </div>
@@ -527,9 +494,80 @@
             const kitchen_light = document.getElementById("kitchen_light");
             const range_slider2 = document.getElementById("range_slider2");
 
+            function onLoadePage() {
+                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        room1_light.checked = data.room1_light;
+                        room2_light.checked = data.room2_light;
+                        room3_light.checked = data.room3_light;
+                        living_room_light.checked = data.living_room_light;
+                        kitchen_light.checked = data.kitchen_light;
+                    })
+            }
 
+
+
+
+
+            let isFetching = false;
 
             function fetchData() {
+                if (isFetching) {
+                    return;
+                }
+
+                isFetching = true;
+
+                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('temperature').textContent = data.temperature;
+                        document.getElementById('humidity').textContent = data.humidity;
+                        document.getElementById('gas').textContent = data.gas;
+                        document.getElementById('carbon').textContent = data.carbon;
+                        document.getElementById('distance').textContent = data.distance;
+
+                        if (data.flame === 100) {
+                            document.getElementById('green_flame').style.display = 'block';
+                            document.getElementById('red_flame').style.display = 'none';
+                        } else {
+                            document.getElementById('green_flame').style.display = 'none';
+                            document.getElementById('red_flame').style.display = 'block';
+                        }
+
+
+                        if (room1_light.checked !== data.room1_light) {
+                            room1_light.checked = data.room1_light;
+                        }
+
+                        if (room2_light.checked !== data.room2_light) {
+                            room2_light.checked = data.room2_light;
+                        }
+
+                        if (room3_light.checked !== data.room3_light) {
+                            room3_light.checked = data.room3_light;
+                        }
+
+                        if (living_room_light.checked !== data.living_room_light) {
+                            living_room_light.checked = data.living_room_light;
+                        }
+
+                        if (kitchen_light.checked !== data.kitchen_light) {
+                            kitchen_light.checked = data.kitchen_light;
+                        }
+
+                        // Allow next fetch after a delay
+                        setTimeout(() => {
+                            isFetching = false;
+                        }, 1000);
+                    });
+            }
+
+
+
+
+            {{--  function fetchData() {
                 fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
                     .then(response => response.json())
                     .then(data => {
@@ -538,13 +576,75 @@
                         // update the content of the span element with the latest value
                         document.getElementById('temperature').textContent = temperature;
                         document.getElementById('humidity').textContent = humidity;
-                        room1_light.checked = data.room1_light;
-                        room2_light.checked = data.room2_light;
-                        room3_light.checked = data.room3_light;
-                        living_room_light.checked = data.living_room_light;
-                        kitchen_light.checked = data.kitchen_light;
+
+                        if (room1_light.checked !== data.room1_light) {
+                            room1_light.checked = data.room1_light;
+                        }
+
+                        if (room2_light.checked !== data.room2_light) {
+                            room2_light.checked = data.room2_light;
+                        }
+
+                        if (room3_light.checked !== data.room3_light) {
+                            room3_light.checked = data.room3_light;
+                        }
+
+                        if (living_room_light.checked !== data.living_room_light) {
+                            living_room_light.checked = data.living_room_light;
+                        }
+
+                        if (kitchen_light.checked !== data.kitchen_light) {
+                            kitchen_light.checked = data.kitchen_light;
+                        }
                     })
-            }
+            }  --}}
+
+            {{--  function fetchData() {
+                // Disable checkboxes during update
+                room1_light.disabled = true;
+                room2_light.disabled = true;
+                room3_light.disabled = true;
+                living_room_light.disabled = true;
+                kitchen_light.disabled = true;
+
+                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        const temperature = data.temperature;
+                        const humidity = data.humidity;
+                        // update the content of the span element with the latest value
+                        document.getElementById('temperature').textContent = temperature;
+                        document.getElementById('humidity').textContent = humidity;
+
+                        if (room1_light.checked !== data.room1_light) {
+                            room1_light.checked = data.room1_light;
+                        }
+
+                        if (room2_light.checked !== data.room2_light) {
+                            room2_light.checked = data.room2_light;
+                        }
+
+                        if (room3_light.checked !== data.room3_light) {
+                            room3_light.checked = data.room3_light;
+                        }
+
+                        if (living_room_light.checked !== data.living_room_light) {
+                            living_room_light.checked = data.living_room_light;
+                        }
+
+                        if (kitchen_light.checked !== data.kitchen_light) {
+                            kitchen_light.checked = data.kitchen_light;
+                        }
+
+                        // Enable checkboxes after update
+                        room1_light.disabled = false;
+                        room2_light.disabled = false;
+                        room3_light.disabled = false;
+                        living_room_light.disabled = false;
+                        kitchen_light.disabled = false;
+                    });
+            }  --}}
+
 
             function room1_motor_fn() {
                 let slival = document.getElementById("range-slider2");
@@ -634,6 +734,8 @@
 
             function kitchen_light_fn() {
                 var checkbox_value = $("#kitchen_light").is(":checked") ? true : false;
+                room1_light.checked = checkbox_value;
+
                 $.ajax({
                     url: "http://localhost/laravel-projects/Esp32/public/kitchen_light",
                     type: "POST",
@@ -647,6 +749,7 @@
                         console.log(xhr.responseText);
                     }
                 });
+
             }
 
 
@@ -700,7 +803,7 @@
 
 
 
-            document.onload = fetchData();
+            document.onload = onLoadePage();
             // define a function to fetch data from API
 
 

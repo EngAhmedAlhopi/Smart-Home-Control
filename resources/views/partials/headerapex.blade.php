@@ -14,6 +14,10 @@
                     <a class=" nav-link d-flex align-items-center" href="{{ route('usersPage') }}"><i
                             class="ft-user"></i><span data-i18n="Dashboard">المستخدمون</span></a>
                 </li>
+                <li class=" nav-item">
+                    <a class=" nav-link d-flex align-items-center" href="{{ route('reportPage') }}"><i
+                            class="ft-tablet"></i><span data-i18n="Dashboard">انشاء تقرير</span></a>
+                </li>
             @endif
 
         </ul>

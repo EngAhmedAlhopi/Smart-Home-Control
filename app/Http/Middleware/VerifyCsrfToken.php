@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         'room2_light',
         'room3_light',
         'living_room_light',
-        'kitchen_light'
+        'kitchen_light',
+        'get-data'
     ];
 }

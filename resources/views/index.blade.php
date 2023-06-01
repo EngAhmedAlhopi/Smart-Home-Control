@@ -483,6 +483,12 @@
                 </div>
             </div>
         @endif
+
+
+        {{--  <button id="test-export" onclick="exportToExcel()"> Test Export</button>  --}}
+
+
+        {{--  <a href="{{ route('export') }}">Export Excel</a>  --}}
     @endsection
 
     @section('script')
@@ -507,9 +513,6 @@
             }
 
 
-
-
-
             let isFetching = false;
 
             function fetchData() {
@@ -522,6 +525,13 @@
                 fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
                     .then(response => response.json())
                     .then(data => {
+                        ultrasonic = data.distance;
+                        mq4 = data.gas;
+                        mq7 = data.carbon;
+                        flame = data.flame;
+                        temperature = data.temperature;
+                        humidity = data.humidity;
+                        ldr = 12321;
                         document.getElementById('temperature').textContent = data.temperature;
                         document.getElementById('humidity').textContent = data.humidity;
                         document.getElementById('gas').textContent = data.gas;
@@ -566,84 +576,6 @@
 
 
 
-
-            {{--  function fetchData() {
-                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
-                    .then(response => response.json())
-                    .then(data => {
-                        const temperature = data.temperature;
-                        const humidity = data.humidity;
-                        // update the content of the span element with the latest value
-                        document.getElementById('temperature').textContent = temperature;
-                        document.getElementById('humidity').textContent = humidity;
-
-                        if (room1_light.checked !== data.room1_light) {
-                            room1_light.checked = data.room1_light;
-                        }
-
-                        if (room2_light.checked !== data.room2_light) {
-                            room2_light.checked = data.room2_light;
-                        }
-
-                        if (room3_light.checked !== data.room3_light) {
-                            room3_light.checked = data.room3_light;
-                        }
-
-                        if (living_room_light.checked !== data.living_room_light) {
-                            living_room_light.checked = data.living_room_light;
-                        }
-
-                        if (kitchen_light.checked !== data.kitchen_light) {
-                            kitchen_light.checked = data.kitchen_light;
-                        }
-                    })
-            }  --}}
-
-            {{--  function fetchData() {
-                // Disable checkboxes during update
-                room1_light.disabled = true;
-                room2_light.disabled = true;
-                room3_light.disabled = true;
-                living_room_light.disabled = true;
-                kitchen_light.disabled = true;
-
-                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
-                    .then(response => response.json())
-                    .then(data => {
-                        const temperature = data.temperature;
-                        const humidity = data.humidity;
-                        // update the content of the span element with the latest value
-                        document.getElementById('temperature').textContent = temperature;
-                        document.getElementById('humidity').textContent = humidity;
-
-                        if (room1_light.checked !== data.room1_light) {
-                            room1_light.checked = data.room1_light;
-                        }
-
-                        if (room2_light.checked !== data.room2_light) {
-                            room2_light.checked = data.room2_light;
-                        }
-
-                        if (room3_light.checked !== data.room3_light) {
-                            room3_light.checked = data.room3_light;
-                        }
-
-                        if (living_room_light.checked !== data.living_room_light) {
-                            living_room_light.checked = data.living_room_light;
-                        }
-
-                        if (kitchen_light.checked !== data.kitchen_light) {
-                            kitchen_light.checked = data.kitchen_light;
-                        }
-
-                        // Enable checkboxes after update
-                        room1_light.disabled = false;
-                        room2_light.disabled = false;
-                        room3_light.disabled = false;
-                        living_room_light.disabled = false;
-                        kitchen_light.disabled = false;
-                    });
-            }  --}}
 
 
             function room1_motor_fn() {
@@ -754,14 +686,31 @@
 
 
 
+            {{--  function data_sensor_insert() {
+
+                let ultrasonic = 0;
+                let mq4 = 0;
+                let mq7 = 0;
+                let flame = 0;
+                let temperature = 0;
+                let humidity = 0;
+                let ldr = 0;
 
 
+                fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
+                    .then(response => response.json())
+                    .then(data => {
+                        ultrasonic = data.distance;
+                        mq4 = data.gas;
+                        mq7 = data.carbon;
+                        flame = data.flame;
+                        temperature = data.temperature;
+                        humidity = data.humidity;
+                        ldr = 12321;
+                    });
 
 
-
-
-
-
+            }  --}}
 
 
 

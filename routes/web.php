@@ -49,12 +49,16 @@ Route::get('/users', [AnoterOperation::class, 'indexUsers'])->name('usersPage');
 Route::post('/store-user', [AnoterOperation::class, 'storeUser'])->name('storeUser');
 Route::get('/delete-user/{key}', [AnoterOperation::class, 'destroyUser'])->name('deleteUser');
 Route::post('/edit-user', [AnoterOperation::class, 'updateUser'])->name('editUser');
+Route::get('/report', [AnoterOperation::class, 'reportPage'])->name('reportPage');
+Route::post('/report', [AnoterOperation::class, 'getData'])->name('getData');
+// Route::post('/get-data', [AnoterOperation::class, 'getData'])->name('getData');
 /* *************************************************************************************** */
 
 /* *************************************************************************************** */
 /*                                 عمليات المستخدمين                               */
 Route::post('/chang-user-pass', [AnoterOperation::class, 'changePassword'])->name('changPass');
 Route::post('/chang-user-image', [AnoterOperation::class, 'changeImage'])->name('changeImage');
+Route::get('/export', [AnoterOperation::class, 'export'])->name('export');
 /* *************************************************************************************** */
 
 Route::get('/notification', function () {

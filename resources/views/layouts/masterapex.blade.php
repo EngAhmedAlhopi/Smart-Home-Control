@@ -799,12 +799,55 @@
     <script src="{{ asset('app-assets2/vendors/js/vendors.min.js') }}"></script>
     <script src="{{ asset('app-assets2/vendors/js/switchery.min.js') }}"></script>
 
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 
 
 
+    {{--  <script>
+        let ultrasonic = 0;
+        let mq4 = 0;
+        let mq7 = 0;
+        let flame = 0;
+        let temperature = 0;
+        let humidity = 0;
+        let ldr = 0;
 
+        function fetchDataForInsert() {
+            fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
+                .then(response => response.json())
+                .then(data => {
+                    ultrasonic = data.distance;
+                    mq4 = data.gas;
+                    mq7 = data.carbon;
+                    flame = data.flame;
+                    temperature = data.temperature;
+                    humidity = data.humidity;
+                    ldr = 12321;
+                });
+        }
 
+        function data_sensor_insert() {
+            fetch('http://localhost/laravel-projects/MyAPIs/public/api/data_sensor_insert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ultrasonic,
+                    mq4,
+                    mq7,
+                    flame,
+                    temperature,
+                    humidity,
+                    ldr
+                })
+            })
+        }
+
+        setInterval(fetchDataForInsert, 15000);
+        setInterval(data_sensor_insert, 15000);
+    </script>  --}}
 
 
 

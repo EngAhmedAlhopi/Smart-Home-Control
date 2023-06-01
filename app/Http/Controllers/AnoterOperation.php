@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Exports\DataExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Maatwebsite\Excel\Facades\Excel;
 use Kreait\Firebase\Contract\Database;
 use Illuminate\Support\Facades\Session;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Maatwebsite\Excel\Concerns\FromQuery;
 
 
 
@@ -213,5 +218,75 @@ class AnoterOperation extends Controller
     {
     }
 
+    public function export()
+    {
+        $export = new DataExport();
+        $fileName = 'data.xlsx';
+
+        return Excel::download($export, $fileName);
+    }
+
     /* *************************************************************************************** */
+
+    public function reportPage()
+    {
+        if (Session::get('username')) {
+            return view('report');
+        } else {
+            return redirect()->route('loginPage');
+        }
+    }
+
+
+
+    public function getData(Request $request)
+    {
+        $dateFrom = $request->input('date_from');
+        $dateTo = $request->input('date_to');
+        Session::put('date_from', $dateFrom);
+        Session::put('date_to', $dateTo);
+
+        $apiUrl = 'http://localhost/laravel-projects/MyAPIs/public/api/get_sensors_data';
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $apiUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 3,
+            CURLOPT_TIMEOUT => 10,
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+            ],
+        ]);
+
+        $requestBody = [
+            'date_from' => $dateFrom,
+            'date_to' => $dateTo,
+        ];
+
+        $jsonRequestBody = json_encode($requestBody);
+
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $jsonRequestBody);
+
+        $apiResponse = curl_exec($curl);
+
+        if (curl_errno($curl)) {
+            $error = curl_error($curl);
+            curl_close($curl);
+            return response()->json(['error' => $error], 500);
+        }
+
+        // Close curl
+        curl_close($curl);
+
+        $responseData = json_decode($apiResponse, true);
+
+        $i = 0;
+        $p_result_out = $responseData;
+
+        return view('report', compact('i', 'p_result_out'));
+    }
 }

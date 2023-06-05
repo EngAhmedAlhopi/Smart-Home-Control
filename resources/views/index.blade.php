@@ -516,11 +516,11 @@
             let isFetching = false;
 
             function fetchData() {
-                if (isFetching) {
-                    return;
-                }
+                {{--  if (isFetching) {
+                        return;
+                    }
+                    isFetching = true;  --}}
 
-                isFetching = true;
 
                 fetch('http://localhost/laravel-projects/Esp32/public/get_things_data')
                     .then(response => response.json())
@@ -681,7 +681,6 @@
                         console.log(xhr.responseText);
                     }
                 });
-
             }
 
 

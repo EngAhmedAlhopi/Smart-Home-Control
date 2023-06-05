@@ -222,7 +222,6 @@ class AnoterOperation extends Controller
     {
         $export = new DataExport();
         $fileName = 'data.xlsx';
-
         return Excel::download($export, $fileName);
     }
 
